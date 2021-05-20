@@ -24,4 +24,14 @@ public class AlgoStringTest{
         String result = algoStringUnderTest.runLengthEncoding("        aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
         assertTrue(result.equalsIgnoreCase("8 9a9a9a9a9a4a"));
     }
+
+    @Test public void generateDocumentTest(){
+        AlgoString algoStringUnderTest = new AlgoString();
+        assertTrue(algoStringUnderTest.
+                   generateDocument("Bste!hetsi ogEAxpelrt x ",
+                   "AlgoExpert is the Best!"));
+        assertTrue(algoStringUnderTest.
+                   generateDocument("a hsgalhsa sanbjksbdkjba kjx",
+                   ""));
+    }
 }
