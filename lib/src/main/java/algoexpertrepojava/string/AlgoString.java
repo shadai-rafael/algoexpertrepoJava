@@ -1,5 +1,8 @@
 package algoexpertrepojava.string;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class AlgoString {
 
   public boolean isPalindrome(String str) {
@@ -47,5 +50,50 @@ public class AlgoString {
       }
     }
     return strBuilder.toString();
+  }
+
+  public boolean generateDocument(String characters, String document) {
+    boolean result = true;
+    HashMap<Character, Integer> mapCharacter = new HashMap<>();
+    HashMap<Character, Integer> mapDocument = new HashMap<>();
+
+    for (char ch: characters.toCharArray()) {
+      if(mapCharacter.containsKey(ch)){
+        int frequency = mapCharacter.get(ch);
+        frequency++;
+        mapCharacter.put(ch,frequency);
+      }else{
+        mapCharacter.put(ch,1);
+      }
+    }
+
+    for (char ch: document.toCharArray()) {
+      if(mapDocument.containsKey(ch)){
+        int frequency = mapDocument.get(ch);
+        frequency++;
+        mapDocument.put(ch,frequency);
+      }else{
+        mapDocument.put(ch,1);
+      }
+    }
+
+    for (Map.Entry documentPair : mapDocument.entrySet()) {
+      char documentKey = (char)documentPair.getKey();
+      if(mapCharacter.containsKey(documentKey)){
+        int charFreq = mapCharacter.get(documentKey);
+        if(charFreq >= (int)documentPair.getValue()){
+          continue;
+        }else{
+          result = false;
+          break;
+        }
+      }
+      else{
+        result = false;
+        break;
+      }
+  }
+
+    return result;
   }
 }
