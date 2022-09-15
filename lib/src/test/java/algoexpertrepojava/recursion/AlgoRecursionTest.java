@@ -21,6 +21,11 @@ package algoexpertrepojava.recursion;
 
 import org.junit.Test;
 import static org.junit.Assert.*;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import org.junit.Before;
 
 public class AlgoRecursionTest {
@@ -39,4 +44,53 @@ public class AlgoRecursionTest {
         assertTrue((algoRecursionUnderTest.getNthFib(4) == 2));
     }
     
+    @Test
+    public void productSumTest(){
+        List<Object> array1 = new ArrayList<Object>();
+        array1.add((Object) Integer.valueOf(-13));
+        array1.add((Object) Integer.valueOf(8));
+
+        List<Object> array2 = new ArrayList<Object>();
+        array2.add((Object) Integer.valueOf(6));
+        array2.add(array1);
+        array2.add((Object) Integer.valueOf(4));
+
+        List<Object> array3 = new ArrayList<Object>();
+        array3.add((Object) Integer.valueOf(7));
+        array3.add((Object) Integer.valueOf(-1));
+
+        List<Object> array4 = new ArrayList<Object>();
+        array4.add((Object) Integer.valueOf(5));
+        array4.add((Object) Integer.valueOf(2));
+        array4.add(array3);
+        array4.add((Object) Integer.valueOf(3));
+        array4.add(array2);
+
+        assertTrue(algoRecursionUnderTest.productSum(array4)==12);
+    }
+
+    @Test
+    public void getPermutationsTest(){
+
+        List<Integer> listForTest = new ArrayList<Integer>();
+        listForTest.add(1);
+        listForTest.add(2);
+        listForTest.add(3);
+
+        List<List<Integer>> listForCheck = new ArrayList<List<Integer>>();
+        listForCheck.add(Arrays.asList(new Integer[] { 1, 2, 3 }));
+        listForCheck.add(Arrays.asList(new Integer[] { 1, 3, 2 }));
+        listForCheck.add(Arrays.asList(new Integer[] { 2, 1, 3 }));
+        listForCheck.add(Arrays.asList(new Integer[] { 2, 3, 1 }));
+        listForCheck.add(Arrays.asList(new Integer[] { 3, 1, 2 }));
+        listForCheck.add(Arrays.asList(new Integer[] { 3, 2, 1 }));
+
+        var res = algoRecursionUnderTest.getPermutations(listForTest);
+        assertTrue(listForCheck.size()==res.size());
+        for (int i = 0; i<listForCheck.size();i++) {
+            for(int j = 0; j<listForCheck.get(i).size();j++){
+                assertTrue(listForCheck.get(i).get(j) == res.get(i).get(j));
+            }
+        }
+    }
 }

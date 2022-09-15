@@ -174,12 +174,11 @@ public class AlgoStack {
     
         return stack;
     }
+
     public ArrayList<Integer> sortStack(ArrayList<Integer> stack) {
         for(int i=1;i<stack.size();i++){
             sortStackHelper(stack,i);
         }
         return stack;
     }
-
 }
-
