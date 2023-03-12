@@ -117,8 +117,28 @@ public class AlgoRecursion {
       }
       finalList.addAll(subList);
     }
-
     return finalList;
   }
 
+/*Powerset
+*Write a function that takes in an array of unique integers and returns its powerset.
+*The powerset P(X) of a set X is the set of all the subsets of X. For example the powerset
+*of [1,2] is [], [1], [2], [1,2]
+*/
+  public List<List<Integer>> powerset(List<Integer> array) {  
+    if(array.isEmpty()){
+      var res = new ArrayList<List<Integer>>();
+      res.add(new ArrayList<Integer>());
+      return res;
+    }
+    var holder = array.remove(array.size()-1);
+    var result = powerset(array);
+    var previousSize = result.size();
+    for(int i = 0; i < previousSize; i++){
+      var temp = new ArrayList<Integer>(result.get(i));
+      temp.add(holder);
+      result.add(temp);
+    }
+    return result;
+  }
 }

@@ -25,6 +25,7 @@ import static org.junit.Assert.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.junit.Before;
 
@@ -72,25 +73,31 @@ public class AlgoRecursionTest {
     @Test
     public void getPermutationsTest(){
 
-        List<Integer> listForTest = new ArrayList<Integer>();
-        listForTest.add(1);
-        listForTest.add(2);
-        listForTest.add(3);
+        List<Integer> listForTest = Arrays.asList(new Integer[] {1,2,3});
 
-        List<List<Integer>> listForCheck = new ArrayList<List<Integer>>();
-        listForCheck.add(Arrays.asList(new Integer[] { 1, 2, 3 }));
-        listForCheck.add(Arrays.asList(new Integer[] { 1, 3, 2 }));
-        listForCheck.add(Arrays.asList(new Integer[] { 2, 1, 3 }));
-        listForCheck.add(Arrays.asList(new Integer[] { 2, 3, 1 }));
-        listForCheck.add(Arrays.asList(new Integer[] { 3, 1, 2 }));
-        listForCheck.add(Arrays.asList(new Integer[] { 3, 2, 1 }));
-
+        Integer[][] array = {{ 1, 2, 3 },{ 1, 3, 2 },{ 2, 1, 3 },{ 2, 3, 1 },{ 3, 1, 2 },{ 3, 2, 1 }};
+        
+        List<List<Integer>> listForCheck = Arrays.stream(array)
+                .map(innerArray -> new ArrayList<>(Arrays.asList(innerArray)))
+                .collect(Collectors.toCollection(ArrayList::new));
+        
         var res = algoRecursionUnderTest.getPermutations(listForTest);
-        assertTrue(listForCheck.size()==res.size());
-        for (int i = 0; i<listForCheck.size();i++) {
-            for(int j = 0; j<listForCheck.get(i).size();j++){
-                assertTrue(listForCheck.get(i).get(j) == res.get(i).get(j));
-            }
-        }
+        assertArrayEquals(listForCheck.toArray(), res.toArray());
     }
+
+    @Test
+    public void getPowerSetTest(){
+        List<Integer> listForTest = new ArrayList<Integer>(Arrays.asList(new Integer[] {1,2,3}));
+
+        Integer[][] array = {{},{1},{2},{1,2},{3},{1,3},{2,3},{1,2,3}};
+
+        List<List<Integer>> listForCheck = Arrays.stream(array)
+                .map(innerArray -> new ArrayList<>(Arrays.asList(innerArray)))
+                .collect(Collectors.toCollection(ArrayList::new));
+
+        var res = algoRecursionUnderTest.powerset(listForTest);        
+
+        assertArrayEquals(res.toArray(), listForCheck.toArray());
+    }
+
 }
