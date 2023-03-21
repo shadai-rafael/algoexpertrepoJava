@@ -76,8 +76,8 @@ public class AlgoRecursionTest {
         List<Integer> listForTest = Arrays.asList(new Integer[] {1,2,3});
 
         Integer[][] array = {{ 1, 2, 3 },{ 1, 3, 2 },{ 2, 1, 3 },{ 2, 3, 1 },{ 3, 1, 2 },{ 3, 2, 1 }};
-        
-        List<List<Integer>> listForCheck = Arrays.stream(array)
+
+          List<List<Integer>> listForCheck = Arrays.stream(array)
                 .map(innerArray -> new ArrayList<>(Arrays.asList(innerArray)))
                 .collect(Collectors.toCollection(ArrayList::new));
         
@@ -91,13 +91,20 @@ public class AlgoRecursionTest {
 
         Integer[][] array = {{},{1},{2},{1,2},{3},{1,3},{2,3},{1,2,3}};
 
-        List<List<Integer>> listForCheck = Arrays.stream(array)
+            List<List<Integer>> listForCheck = Arrays.stream(array)
                 .map(innerArray -> new ArrayList<>(Arrays.asList(innerArray)))
                 .collect(Collectors.toCollection(ArrayList::new));
 
         var res = algoRecursionUnderTest.powerset(listForTest);        
 
         assertArrayEquals(res.toArray(), listForCheck.toArray());
+    }
+
+    @Test
+    public void phoneNumberMnemonicsTest(){
+        String[] array = {"ad","ae","af","bd","be","bf","cd","ce","cf"};
+        var res = algoRecursionUnderTest.phoneNumberMnemonics("23");
+        assertArrayEquals(array,res.toArray());
     }
 
 }

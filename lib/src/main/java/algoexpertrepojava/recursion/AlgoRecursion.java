@@ -19,14 +19,18 @@ SOFTWARE.
 */
 package algoexpertrepojava.recursion;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
-import java.util.ArrayList;
 
 public class AlgoRecursion {
 
   static private AlgoRecursion algoRecursion = null;
+
+  private String[] innerArray ={"0","1","abc","def","ghi","jkl","mno","pqrs",
+  "tuv","wxyz"};
 
   private AlgoRecursion(){
   }
@@ -141,4 +145,33 @@ public class AlgoRecursion {
     }
     return result;
   }
+
+  /*Phone Number Mnemonics
+   * Given a stringified phone number of non-zero length write a function that returns
+   * all mnemonics for this phone number in any order.
+   * For this problem a valid mnemonic may only contain letters and the digits 0 and 1.
+   * In other words, if a digit is able to be represented by a letter then it must be.
+   * Digits 0 and 1 are the only two digits that don't have a letter representations on
+   * the keyboard.
+   */
+  public ArrayList<String> phoneNumberMnemonics(String phoneNumber) {
+    ArrayList<String> result = new ArrayList<>();
+    if(!phoneNumber.isEmpty()){
+      var index = Integer.parseInt(Character.toString(phoneNumber.charAt(0)));
+      for(int j = 0; j < innerArray[index].length(); j++){        
+        if(phoneNumber.length()>1){
+          var temp = phoneNumber.substring(1);
+          var prevResult = phoneNumberMnemonics(temp);
+          for(var element: prevResult){
+            element = innerArray[index].charAt(j) + element;
+            result.add(element);
+          }          
+        }else{
+          result.add(Character.toString(innerArray[index].charAt(j)));
+        }
+      }
+    }
+    return result;
+  }
+
 }
